@@ -292,7 +292,7 @@ export default class MuiDataTable extends React.Component {
   render() {
     return (
       <Paper zDepth={1}>
-        <Table>
+        <Table onRowClick={this.props.config.onClick}>
           <TableHeader>
             <TableRow style={this.shouldShowItem(this.props.config.search)}>
               <TableHeaderColumn
