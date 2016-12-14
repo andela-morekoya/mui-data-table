@@ -28,11 +28,8 @@ const searchHeaderColumnStyle = {
   textAlign: 'right'
 };
 
-const searchStyle = {
+var searchStyle = {
   color: '#777777',
-  opacity: 0,
-  transitionDuration: '0.6s',
-  transitionProperty: 'opacity',
   border: 0,
   outline: 0,
   fontSize: 16,
@@ -59,7 +56,7 @@ export default class MuiDataTable extends React.Component {
   constructor(props) {
     super();
     let tableData = props.config.data || [];
-    let rowsPerPage = props.config.paginated.constructor === Object ? props.config.paginated.rowsPerPage : 5;
+    let rowsPerPage = props.config.paginated.constructor === Object ? props.config.paginated.rowsPerPage : 10;
 
     tableData = props.config.paginated ? new Paginate(tableData).perPage(rowsPerPage) : tableData;
 
@@ -68,7 +65,7 @@ export default class MuiDataTable extends React.Component {
     }
 
     this.state = {
-      disabled: true,
+      disabled: false,
       style: searchStyle,
       idempotentData: props.config.data,
       paginatedIdempotentData: new Paginate(props.config.data),
@@ -319,7 +316,7 @@ export default class MuiDataTable extends React.Component {
             </TableRow>
           </TableHeader>
 
-          <TableBody showRowHover>
+          <TableBody showRowHover stripedRows>
             {this.populateTableWithdata(this.state.tableData, this.columns)}
           </TableBody>
 
